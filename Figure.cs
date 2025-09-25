@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace madu
-{ 
+{
     class Figure
     {
         protected List<Point> pList;
+
         public void Draw()
         {
             foreach (Point p in pList)
@@ -16,6 +17,7 @@ namespace madu
                 p.Draw();
             }
         }
+
         internal bool IsHit(Figure figure)
         {
             foreach (var p in pList)
@@ -25,6 +27,7 @@ namespace madu
             }
             return false;
         }
+
         private bool IsHit(Point point)
         {
             foreach (var p in pList)

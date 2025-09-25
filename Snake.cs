@@ -54,7 +54,7 @@ namespace madu
             return false;
         }
 
-        public void HandlKey(ConsoleKey key)
+        public void HandleKey(ConsoleKey key)
         {
             if (key == ConsoleKey.LeftArrow)
                 direction = Direction.Left;
