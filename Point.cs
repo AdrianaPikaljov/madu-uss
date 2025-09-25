@@ -71,5 +71,6 @@ namespace madu
         {
             return x + ", " + y + ", " + sym;
         }
+
     }
 }

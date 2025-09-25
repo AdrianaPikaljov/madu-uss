@@ -1,26 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Runtime;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using System.Threading;
 
 namespace madu
 {
-    class SnakeMain
+    class Program
     {
         static void Main(string[] args)
         {
             Console.SetWindowSize(80, 25);
             Console.SetBufferSize(80, 25);
+            Console.CursorVisible = false;
 
             Walls walls = new Walls(80, 25);
             walls.Draw();
 
-
+            // начальные параметры
             Point p = new Point(4, 5, '*');
             Snake snake = new Snake(p, 4, Direction.Right);
             snake.Draw();
@@ -29,50 +23,72 @@ namespace madu
             Point food = foodCreator.CreateFood();
             food.Draw();
 
-            while (true)
+            // классы игрока, уровня и очков
+            Console.SetCursorPosition(0, 0);
+            Console.Write("kirjuta nimi: ");
+            string playerName = Console.ReadLine();
+            Player player = new Player(playerName);
+
+            Score score = new Score();
+            Level level = new Level();
+
+            bool playing = true;
+            while (playing)
             {
+                // проверка на проигрыш
                 if (walls.IsHit(snake) || snake.IsHitTail())
                 {
+                    playing = false;
                     break;
                 }
+
+                // если змейка съела еду
                 if (snake.Eat(food))
                 {
+                    score.EatFood();
                     food = foodCreator.CreateFood();
                     food.Draw();
+
+                    // каждые 5 очков – новый уровень
+                    if (score.CurrentScore % 5 == 0)
+                    {
+                        level.LevelUp();
+                    }
                 }
                 else
                 {
                     snake.Move();
                 }
 
-                Thread.Sleep(100);
+                // отображение очков и уровня
+                score.DisplayScore(2, 0);
+                level.DisplayLevel(2, 1);
+
+                Thread.Sleep(level.Speed);
+
+                // управление
                 if (Console.KeyAvailable)
                 {
-                    ConsoleKeyInfo key = Console.ReadKey();
+                    ConsoleKeyInfo key = Console.ReadKey(true);
                     snake.HandleKey(key.Key);
                 }
             }
-            WriteGameOver();
-            Console.ReadLine();
-        }
 
+            // конец игры
+            Console.Clear();
+            Console.WriteLine("=== game over ===");
+            Console.WriteLine($"player: {player.Name}");
+            Console.WriteLine($"score: {score.CurrentScore}");
 
-        static void WriteGameOver()
-        {
-            int xOffset = 25;
-            int yOffset = 8;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(xOffset, yOffset++);
-            WriteText("============================", xOffset, yOffset++);
-            WriteText("          ADRI LOX          ", xOffset + 1, yOffset++);
-            WriteText("============================", xOffset, yOffset++);
-        }
+            // сохранить результат
+            player.SetFinalScore(score.CurrentScore);
+            player.SaveResult();
 
-        static void WriteText(String text, int xOffset, int yOffset)
-        {
-            Console.SetCursorPosition(xOffset, yOffset);
-            Console.WriteLine(text);
+            Console.WriteLine("\ntabel rekorditega:");
+            Player.DisplayResults();
+
+            Console.WriteLine("\nvajuta suvalist nuppu et valjuda");
+            Console.ReadKey();
         }
     }
-
 }
