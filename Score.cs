@@ -20,7 +20,6 @@ namespace madu
         public void DisplayScore(int x, int y)
         {
             Console.SetCursorPosition(x, y);
-            Console.WriteLine($"score: {CurrentScore}   ");
         }
     }
 }

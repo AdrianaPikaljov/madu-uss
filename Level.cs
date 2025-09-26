@@ -8,25 +8,24 @@ namespace madu
 {
     class Level
     {
-        public int CurrentLevel { get; private set; }
-        public int Speed { get; private set; }
+        public int CurrentLevel { get; set; }
+        public int Speed { get; set; }
 
         public Level()
         {
             CurrentLevel = 1;
-            Speed = 150; // начальная задержка
+            Speed = 150; // начальная 
         }
 
         public void LevelUp()
         {
             CurrentLevel++;
-            Speed = Math.Max(50, Speed - 10);
+            Speed = Math.Max(50, Speed - 30);
         }
 
         public void DisplayLevel(int x, int y)
         {
             Console.SetCursorPosition(x, y);
-            Console.WriteLine($"level: {CurrentLevel}   ");
         }
     }
 }
