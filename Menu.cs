@@ -15,7 +15,7 @@ namespace madu
 
         public Menu()
         {
-            selectedOption = 0; // Start with the first option selected
+            selectedOption = 0; 
         }
 
         public void ShowMenu()
@@ -50,12 +50,12 @@ namespace madu
                 if (i == selectedOption)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("► ");  // Selection arrow
+                    Console.Write("► ");  
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    Console.Write("  ");  // Empty space for alignment
+                    Console.Write("  ");  
                 }
 
                 Console.WriteLine(options[i]);

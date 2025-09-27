@@ -56,11 +56,11 @@ namespace Madu
             Console.ResetColor();
 
             // Setup snake
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
+
             Point p = new Point(4, 5, '*');
             Snake snake = new Snake(p, 4, Direction.Right);
             snake.Draw();
-            Console.ResetColor();
+     
 
             // Setup food
             Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -101,7 +101,7 @@ namespace Madu
                     snake.Move();
                 }
 
-                // Display HUD
+                
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.SetCursorPosition(0, 0);
                 Console.Write($"SCORE: {score.CurrentScore}");
@@ -124,7 +124,7 @@ namespace Madu
                 }
             }
 
-            // Game over screen
+            
             Console.Clear();
 
             Sounds gameOverSound = new Sounds();
@@ -149,7 +149,7 @@ namespace Madu
             Console.WriteLine($"SCORE: {score.CurrentScore}");
             Console.ResetColor();
 
-            // Salvesta tulemus
+            
             player.SetFinalScore(score.CurrentScore);
             player.SaveResult();
 

@@ -22,7 +22,7 @@ namespace madu
             Score = score;
         }
 
-        //Сохранение результата в файл
+        
         public void SaveResult()
         {
             string fileName = "GameResults.txt";
@@ -34,7 +34,7 @@ namespace madu
             }
         }
 
-        //Чтение и вывод результатов
+        
         public static void DisplayResults()
         {
             string fileName = "GameResults.txt";
