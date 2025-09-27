@@ -1,36 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace madu
 {
     class Sounds
     {
         private readonly string eatPath;
+        private readonly string movePath;
+        private readonly string gameOverPath;
 
         public Sounds()
         {
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
-            eatPath = Path.Combine("eat.wav");
-
+            eatPath = Path.Combine(basePath, "eat2.wav");
+            movePath = Path.Combine(basePath, "move.wav");
+            gameOverPath = Path.Combine(basePath, "gameover.wav");
         }
-
 
         public void PlayEat()
         {
-            try
-            {
-                SoundPlayer eat = new SoundPlayer(eatPath);
-                eat.Play();
-            }
-            catch {
-            }
+            PlaySound(eatPath);
         }
 
+        public void PlayMove()
+        {
+            PlaySound(movePath);
+        }
 
+        public void PlayGameOver()
+        {
+            PlaySound(gameOverPath);
+        }
+
+        private void PlaySound(string path)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    SoundPlayer sp = new SoundPlayer(path);
+                    sp.Play();
+                }
+                else
+                {
+                    Console.WriteLine($"Helifaili ei leitud: {path}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Heli esitamise viga: " + ex.Message);
+            }
+        }
     }
 }
-

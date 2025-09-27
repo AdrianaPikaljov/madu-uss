@@ -8,25 +8,30 @@ namespace Madu
     {
         static void Main(string[] args)
         {
-            Menu menu = new Menu();
-            menu.NavigateMenu();
+            bool running = true;
 
-            // Get selected option
-            int selectedOption = menu.GetSelectedOption();
-
-            switch (selectedOption)
+            while (running)
             {
-                case 0: // Start game
-                    StartGame();  // Start the game after name input
-                    break;
+                Menu menu = new Menu();
+                menu.NavigateMenu();
 
-                case 1: // Show high scores
-                    ShowHighScores();
-                    break;
+                int selectedOption = menu.GetSelectedOption();
 
-                case 2: // Exit
-                    Environment.Exit(0);
-                    break;
+                switch (selectedOption)
+                {
+                    case 0: // Start game
+                        StartGame();
+                        break;
+
+                    case 1: // Show high scores
+                        ShowHighScores();
+                        break;
+
+                    case 2: // Exit
+                        running = false;
+                        Environment.Exit(0);
+                        break;
+                }
             }
         }
 
@@ -34,29 +39,30 @@ namespace Madu
         {
             Console.Clear();
 
-            // Ask for player name before starting the game
+            // Ask for player name
             Console.SetCursorPosition(0, 0);
             Console.Write("Sisesta oma nimi: ");
             string playerName = Console.ReadLine();
             Player player = new Player(playerName);
 
-            // Clear the first row after name input
+            // Clear input row
             Console.SetCursorPosition(0, 0);
-            Console.Write(new string(' ', 80)); // Clear the first row
+            Console.Write(new string(' ', 80));
 
-            // Draw game field after name input
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            // Draw walls
+            Console.ForegroundColor = ConsoleColor.Red;
             Walls walls = new Walls(80, 25);
             walls.Draw();
             Console.ResetColor();
 
-            // Setup game objects
+            // Setup snake
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Point p = new Point(4, 5, '*');
             Snake snake = new Snake(p, 4, Direction.Right);
             snake.Draw();
             Console.ResetColor();
 
+            // Setup food
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             FoodCreator foodCreator = new FoodCreator(80, 25, '$');
             Point food = foodCreator.CreateFood();
@@ -95,16 +101,14 @@ namespace Madu
                     snake.Move();
                 }
 
-                // Display score, level, and player name with different colors
+                // Display HUD
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.SetCursorPosition(0, 0);
                 Console.Write($"SCORE: {score.CurrentScore}");
 
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.SetCursorPosition(20, 0);
                 Console.Write($"LEVEL: {level.CurrentLevel}");
 
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.SetCursorPosition(40, 0);
                 Console.Write($"PLAYER: {player.Name}");
                 Console.ResetColor();
@@ -120,39 +124,44 @@ namespace Madu
                 }
             }
 
-            // End of the game display
+            // Game over screen
             Console.Clear();
 
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(35, 5);
-            Console.WriteLine("=== GAME OVER ===");
+            Sounds gameOverSound = new Sounds();
+            gameOverSound.PlayGameOver();
+
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.SetCursorPosition(27, 5);
+            Console.WriteLine(" ___ ___ _____ ___    ___ _ _ ___ ___ ");
+            Console.SetCursorPosition(27, 6);
+            Console.WriteLine("| . | .'|     | -_|  | . | | | -_|  _|");
+            Console.SetCursorPosition(27, 7);
+            Console.WriteLine("|_  |__,|_|_|_|___|  |___|\\_/|___|_|  ");
+            Console.SetCursorPosition(27, 8);
+            Console.WriteLine("|___|                                  ");
             Console.ResetColor();
 
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.SetCursorPosition(35, 6);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(35, 10);
             Console.WriteLine($"PLAYER: {player.Name}");
 
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.SetCursorPosition(35, 7);
+            Console.SetCursorPosition(35, 11);
             Console.WriteLine($"SCORE: {score.CurrentScore}");
             Console.ResetColor();
 
+            // Salvesta tulemus
             player.SetFinalScore(score.CurrentScore);
             player.SaveResult();
 
-            Console.WriteLine("\nTabel rekorditega:");
-            Player.DisplayResults();
-
-            Console.WriteLine("\nVajuta suvalist klahvi, et väljuda...");
-            Console.ReadKey();
+            // Väike paus, et mängija näeks tulemust
+            Thread.Sleep(5000);
         }
 
         static void ShowHighScores()
         {
             Console.Clear();
-            Console.SetCursorPosition(35, 5);
+            Console.SetCursorPosition(35, 14);
             Console.WriteLine("=== Rekorditabel ===");
-            // Display high scores (implement as per your game logic)
             Player.DisplayResults();
 
             Console.WriteLine("\nVajuta suvalist klahvi, et tagasi minna...");

@@ -26,25 +26,38 @@ namespace madu
             Console.CursorVisible = false;
 
             // Title
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.SetCursorPosition(35, 5);
-            Console.WriteLine("=== SNAKE ===");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.SetCursorPosition(20, 5);
+            Console.WriteLine("  ________  _____  ___        __       __   ___  _______  ");
+            Console.SetCursorPosition(20, 6);
+            Console.WriteLine(" /\"       )(\"   \\|\"  \\      /\"\"\\     |/\"| /  \")/\"     \"| ");
+            Console.SetCursorPosition(20, 7);
+            Console.WriteLine("(:   \\___/ |.\\\\   \\    |    /    \\    (: |/   /(: ______) ");
+            Console.SetCursorPosition(20, 8);
+            Console.WriteLine(" \\___  \\   |: \\.   \\\\  |   /' /\\  \\   |    __/  \\/    |   ");
+            Console.SetCursorPosition(20, 9);
+            Console.WriteLine("  __/  \\\\  |.  \\    \\. |  //  __'  \\  (// _  \\  // ___)_  ");
+            Console.SetCursorPosition(20, 10);
+            Console.WriteLine(" /\" \\   :) |    \\    \\ | /   /  \\\\  \\ |: | \\  \\(:      \"| ");
+            Console.SetCursorPosition(20, 11);
+            Console.WriteLine("(_______/   \\___|\\____\\)(___/    \\___)(__|  \\__)\\_______) ");
 
-            // Display menu options
+
             for (int i = 0; i < options.Length; i++)
             {
+                Console.SetCursorPosition(35, 13 + i);
+
                 if (i == selectedOption)
                 {
-                    Console.BackgroundColor = ConsoleColor.Gray;
                     Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("► ");  // Selection arrow
                 }
                 else
                 {
-                    Console.BackgroundColor = ConsoleColor.Black;
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.Write("  ");  // Empty space for alignment
                 }
 
-                Console.SetCursorPosition(35, 7 + i);
                 Console.WriteLine(options[i]);
                 Console.ResetColor();
             }
@@ -73,7 +86,7 @@ namespace madu
                 }
                 else if (key.Key == ConsoleKey.Enter)
                 {
-                    isNavigating = false;  // Stop navigating when Enter is pressed
+                    isNavigating = false;  
                 }
             }
         }

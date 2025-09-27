@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace madu
 {
@@ -56,6 +53,8 @@ namespace madu
 
         public void HandleKey(ConsoleKey key)
         {
+            Direction oldDirection = direction;
+
             if (key == ConsoleKey.LeftArrow)
                 direction = Direction.Left;
             else if (key == ConsoleKey.RightArrow)
@@ -64,6 +63,13 @@ namespace madu
                 direction = Direction.Down;
             else if (key == ConsoleKey.UpArrow)
                 direction = Direction.Up;
+
+            // Kui suund muutus -> mängi heli
+            if (oldDirection != direction)
+            {
+                Sounds sounds = new Sounds();
+                sounds.PlayMove();
+            }
         }
 
         public bool Eat(Point food)
