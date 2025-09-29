@@ -39,30 +39,36 @@ namespace Madu
         {
             Console.Clear();
 
-            // Ask for player name
+            // nimi
             Console.SetCursorPosition(0, 0);
             Console.Write("Sisesta oma nimi: ");
             string playerName = Console.ReadLine();
             Player player = new Player(playerName);
 
-            // Clear input row
+            // Joonista
+            
+            Console.SetCursorPosition(0, 0);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(new string('>', 80));
+
+            // Kustuta
             Console.SetCursorPosition(0, 0);
             Console.Write(new string(' ', 80));
 
-            // Draw walls
+            //  walls
             Console.ForegroundColor = ConsoleColor.Red;
             Walls walls = new Walls(80, 25);
             walls.Draw();
             Console.ResetColor();
 
-            // Setup snake
+            //  snake
 
             Point p = new Point(4, 5, '*');
             Snake snake = new Snake(p, 4, Direction.Right);
             snake.Draw();
      
 
-            // Setup food
+            //  food
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             FoodCreator foodCreator = new FoodCreator(80, 25, '$');
             Point food = foodCreator.CreateFood();
@@ -153,14 +159,14 @@ namespace Madu
             player.SetFinalScore(score.CurrentScore);
             player.SaveResult();
 
-            // Väike paus, et mängija näeks tulemust
+            // paus ja ss menuu
             Thread.Sleep(5000);
         }
 
         static void ShowHighScores()
         {
             Console.Clear();
-            Console.SetCursorPosition(35, 14);
+            Console.SetCursorPosition(23, 0);
             Console.WriteLine("=== Rekorditabel ===");
             Player.DisplayResults();
 

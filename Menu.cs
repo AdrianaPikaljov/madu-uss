@@ -50,7 +50,7 @@ namespace madu
                 if (i == selectedOption)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("► ");  
+                    Console.Write(">");  
                 }
                 else
                 {
