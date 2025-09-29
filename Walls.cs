@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace madu
+﻿namespace madu
 {
     class Walls
     {
@@ -14,10 +8,13 @@ namespace madu
         {
             wallList = new List<Figure>();
 
-            HorizontalLine upLine = new HorizontalLine(0, mapWidth - 2, 1, '+');
+            // Skip the first row (0) so score can be displayed
+            HorizontalLine upLine = new HorizontalLine(0, mapWidth - 2, 1, '+');   // start at row 1
             HorizontalLine downLine = new HorizontalLine(0, mapWidth - 2, mapHeight - 1, '+');
-            VerticalLine leftLine = new VerticalLine(0, mapHeight - 2, 0, '+');
-            VerticalLine rightLine = new VerticalLine(0, mapHeight - 2, mapWidth - 2, '+');
+
+            // Skip row 0, so vertical walls start at row 1 and end at bottom - 1
+            VerticalLine leftLine = new VerticalLine(1, mapHeight - 2, 0, '+');    // col 0
+            VerticalLine rightLine = new VerticalLine(1, mapHeight - 2, mapWidth - 2, '+'); // right wall
 
             wallList.Add(upLine);
             wallList.Add(downLine);

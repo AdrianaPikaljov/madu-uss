@@ -22,7 +22,7 @@ namespace madu
         {
             Console.Clear();
             Console.SetWindowSize(90, 25);
-            Console.SetBufferSize(90, 25);
+
             Console.CursorVisible = false;
 
             // Title
