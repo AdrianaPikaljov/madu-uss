@@ -33,6 +33,16 @@
             }
             return false;
         }
+        internal bool IsHit(Point point)
+        {
+            foreach (var wall in wallList)
+            {
+                if (wall.IsHit(point))
+                    return true;
+            }
+            return false;
+        }
+
 
         public void Draw()
         {

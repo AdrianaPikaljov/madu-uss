@@ -59,6 +59,10 @@ namespace Madu
             Console.ForegroundColor = ConsoleColor.Red;
             Walls walls = new Walls(80, 25);
             walls.Draw();
+
+            Obstacles obstacles = new Obstacles();
+            obstacles.Draw();
+
             Console.ResetColor();
 
             //  snake
@@ -70,7 +74,7 @@ namespace Madu
 
             //  food
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            FoodCreator foodCreator = new FoodCreator(80, 25, '$');
+            FoodCreator foodCreator = new FoodCreator(80, 25, '$', walls, obstacles, snake);
             Point food = foodCreator.CreateFood();
             food.Draw();
             Console.ResetColor();
@@ -81,7 +85,7 @@ namespace Madu
             bool playing = true;
             while (playing)
             {
-                if (walls.IsHit(snake) || snake.IsHitTail())
+                if (walls.IsHit(snake) || obstacles.IsHit(snake) || snake.IsHitTail())
                 {
                     playing = false;
                     break;

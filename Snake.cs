@@ -84,5 +84,10 @@ namespace madu
             else
                 return false;
         }
+        public List<Point> GetPoints()
+        {
+            return pList;
+        }
+
     }
 }

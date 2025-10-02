@@ -28,7 +28,7 @@ namespace madu
             return false;
         }
 
-        private bool IsHit(Point point)
+        public bool IsHit(Point point)
         {
             foreach (var p in pList)
             {
@@ -37,5 +37,11 @@ namespace madu
             }
             return false;
         }
+
+        public List<Point> GetPoints()
+        {
+            return pList;
+        }
+
     }
 }

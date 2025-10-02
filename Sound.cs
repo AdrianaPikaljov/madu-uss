@@ -13,7 +13,7 @@ namespace madu
         public Sounds()
         {
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
-            eatPath = Path.Combine(basePath, "eat2.wav");
+            eatPath = Path.Combine(basePath, "food.wav");
             movePath = Path.Combine(basePath, "move.wav");
             gameOverPath = Path.Combine(basePath, "gameover.wav");
         }
