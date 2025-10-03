@@ -64,7 +64,7 @@ namespace madu
             else if (key == ConsoleKey.UpArrow)
                 direction = Direction.Up;
 
-            // Kui suund muutus mängib heli
+            
             if (oldDirection != direction)
             {
                 Sounds sounds = new Sounds();

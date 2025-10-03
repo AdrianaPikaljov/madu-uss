@@ -11,7 +11,6 @@ namespace madu
         {
             obstacleList = new List<Figure>();
 
-            // Näide: 3 horisontaalset ja 2 vertikaalset takistust
             obstacleList.Add(new HorizontalLine(20, 30, 10, '#'));
             obstacleList.Add(new HorizontalLine(50, 60, 15, '#'));
             obstacleList.Add(new HorizontalLine(10, 25, 20, '#'));

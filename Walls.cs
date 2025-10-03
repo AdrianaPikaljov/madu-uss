@@ -8,13 +8,13 @@
         {
             wallList = new List<Figure>();
 
-            // Skip the first row (0) so score can be displayed
-            HorizontalLine upLine = new HorizontalLine(0, mapWidth - 2, 1, '+');   // start at row 1
+            
+            HorizontalLine upLine = new HorizontalLine(0, mapWidth - 2, 1, '+');   
             HorizontalLine downLine = new HorizontalLine(0, mapWidth - 2, mapHeight - 1, '+');
 
-            // Skip row 0, so vertical walls start at row 1 and end at bottom - 1
-            VerticalLine leftLine = new VerticalLine(1, mapHeight - 2, 0, '+');    // col 0
-            VerticalLine rightLine = new VerticalLine(1, mapHeight - 2, mapWidth - 2, '+'); // right wall
+            
+            VerticalLine leftLine = new VerticalLine(1, mapHeight - 2, 0, '+'); 
+            VerticalLine rightLine = new VerticalLine(1, mapHeight - 2, mapWidth - 2, '+'); 
 
             wallList.Add(upLine);
             wallList.Add(downLine);

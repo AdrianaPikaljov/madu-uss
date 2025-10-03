@@ -39,6 +39,9 @@ namespace Madu
         {
             Console.Clear();
 
+            Console.SetWindowSize(80, 50); 
+
+
             // nimi
             Console.SetCursorPosition(0, 0);
             Console.Write("Sisesta oma nimi: ");
@@ -136,20 +139,11 @@ namespace Madu
 
             
             Console.Clear();
-
             Sounds gameOverSound = new Sounds();
             gameOverSound.PlayGameOver();
 
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.SetCursorPosition(27, 5);
-            Console.WriteLine(" ___ ___ _____ ___    ___ _ _ ___ ___ ");
-            Console.SetCursorPosition(27, 6);
-            Console.WriteLine("| . | .'|     | -_|  | . | | | -_|  _|");
-            Console.SetCursorPosition(27, 7);
-            Console.WriteLine("|_  |__,|_|_|_|___|  |___|\\_/|___|_|  ");
-            Console.SetCursorPosition(27, 8);
-            Console.WriteLine("|___|                                  ");
-            Console.ResetColor();
+            GameOverScreen gameOver = new GameOverScreen();
+            gameOver.Display();
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(35, 10);
