@@ -44,12 +44,12 @@ namespace madu
                 }
                 else
                 {
-                    Console.WriteLine($"Helifaili ei leitud: {path}");
+                    Console.WriteLine();
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Heli esitamise viga: " + ex.Message);
+                Console.WriteLine();
             }
         }
     }
